@@ -23,6 +23,11 @@ pipeline{
                 sh "echo 'data/mysql/' > .dockerignore"
             }
         }
+        stage('FIX CONFIG') {
+                steps {
+                    sh 'sed -i "s/django_cont:8000/django_app:8000/" nginx/default.conf'
+                }
+        }
         stage("Build"){
             steps{
                 // echo "Stopping old builds if present"
